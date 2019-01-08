@@ -1,8 +1,9 @@
 """
 Implement a GUI for viewing and updating blog
 """
+from itertools import chain
 from tkinter import *
-from tkinter.messagebox import showerror
+from tkinter.messagebox import showerror, showinfo
 import shelve
 
 shelvename = 'class-shelve'
@@ -24,6 +25,7 @@ def makeWidgets():
         ent.grid(row=ix, column=1)
         entries[label] = ent
 
+    Button(window, text='Проверить доступность', command=checkAvaibility).pack(side=LEFT)
     Button(window, text="Найти статью", command=fetchRecord).pack(side=LEFT)
     Button(window, text="Обновить", command=updateRecord).pack(side=LEFT)
     Button(window, text="Выход", command=window.quit).pack(side=RIGHT)
@@ -52,6 +54,19 @@ def updateRecord():
     for field in fieldnames:
         setattr(record, field, eval(entries[field].get()))
     db[key] = record
+
+
+def checkAvaibility():
+    import subprocess
+    reply = subprocess.run(['ping', '-c', '3', '-n', '8.8.8.8'],
+                           stdout=subprocess.PIPE,
+                           stdin=subprocess.PIPE,
+                           )
+    # todo должно открыться окно с результатом проверки
+    if reply.returncode == 0:
+        showinfo(title='popup', message='Работает!')
+    else:
+        showinfo(title='popup', message='Не работает!')
 
 
 db = shelve.open(shelvename)
