@@ -83,7 +83,8 @@ WSGI_APPLICATION = 'khatangatao.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        # 'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('POSTGRES_DB', 'main_db'),
         'USER': os.environ.get('POSTGRES_USER', 'maindb_user'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'pR!s+an'),
