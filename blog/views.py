@@ -19,7 +19,7 @@ class EntryDetail(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['entry'] = self.entry
+        kwargs['entry'] = self.model
         return kwargs
 
     def get_context_data(self, **kwargs):

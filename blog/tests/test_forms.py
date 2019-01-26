@@ -1,11 +1,12 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-
+from django_webtest import WebTest
 
 from ..forms import CommentForm
 from ..models import Entry, Comment
 
-class CommentFormTest(TestCase):
+
+class CommentFormTest(WebTest):
 
     def setUp(self):
         user = get_user_model().objects.create_user('zoidberg')
@@ -37,3 +38,16 @@ class CommentFormTest(TestCase):
         self.assertEqual(form.errors, {'name': ['This field is required.'],
                                        'email': ['This field is required.'],
                                        'body': ['This field is required.']})
+
+    def test_form_error(self):
+        page = self.app.get(self.entry.get_absolute_url())
+        page = page.form.submit()
+        self.assertContains(page, "This field is required.")
+
+    def test_form_success(self):
+        page = self.app.get(self.entry.get_absolute_url())
+        page.form['name'] = "Phillip"
+        page.form['email'] = "phillip@example.com"
+        page.form['body'] = "Test comment body."
+        page = page.form.submit()
+        self.assertRedirects(page, self.entry.get_absolute_url())

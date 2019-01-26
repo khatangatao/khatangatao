@@ -11,3 +11,8 @@
         Комментариев пока нет.
     {% endfor %}
 {% endblock %}
+<h5>Add a comment</h5>
+<form method="post">
+    {{ form.as_table }}
+    <input type="submit" value="Create Comment">
+</form>
