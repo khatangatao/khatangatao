@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView
 
 from .forms import CommentForm
-from .models import Entry
+from .models import Entry, Comment
 
 
 class HomeView(ListView):
@@ -19,7 +19,8 @@ class EntryDetail(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['entry'] = self.object
+        context['blogger'] = get_object_or_404(BlogAuthor, pk=self.kwargs['pk'])
+        kwargs['entry'] = self.entry
         return kwargs
 
     def get_context_data(self, **kwargs):
