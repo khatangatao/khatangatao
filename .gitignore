@@ -107,3 +107,6 @@ venv.bak/
 
 # scripts
 runserver.sh
+
+# database
+docker/
