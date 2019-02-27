@@ -10,4 +10,10 @@
     {% empty %}
         Комментариев пока нет.
     {% endfor %}
+    <h5>Add a comment</h5>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="Create Comment">
+</form>
 {% endblock %}

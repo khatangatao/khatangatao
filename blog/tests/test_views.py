@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from blog.models import Entry, Comment
+from django_webtest import WebTest
 
 
 class HomePageTests(TestCase):
@@ -36,7 +37,7 @@ class HomePageTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class EntryViewTest(TestCase):
+class EntryViewTest(WebTest):
     def setUp(self):
         self.user = get_user_model().objects.create(username='some_user')
         self.entry = Entry.objects.create(title='1-title', body='1-body', author=self.user)
@@ -61,3 +62,7 @@ class EntryViewTest(TestCase):
         self.comment = Comment.objects.create(entry=self.entry, body='comments body', name=self.user)
         response = self.client.get(self.entry.get_absolute_url())
         self.assertContains(response, 'comments body')
+
+    def test_view_page(self):
+        page = self.app.get(self.entry.get_absolute_url())
+        self.assertEqual(len(page.forms), 1)
