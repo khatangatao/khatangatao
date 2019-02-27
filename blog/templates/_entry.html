@@ -9,5 +9,6 @@
     <p></p>
 
     {{ entry.body|linebreaks }}
+    <p>Комментариев:{{ entry.comment_set.all.count }} </p>
 
 </article>
