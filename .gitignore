@@ -56,6 +56,7 @@ coverage.xml
 .idea
 local_settings.py
 db.sqlite3
+static/
 
 # Flask stuff:
 instance/
@@ -103,3 +104,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# scripts
+runserver.sh
+
+# database
+docker/
