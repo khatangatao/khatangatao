@@ -10,6 +10,7 @@ from .models import Entry, Comment
 class HomeView(ListView):
     template_name = 'index.html'
     queryset = Entry.objects.order_by('-created_at')
+    paginate_by = 10
 
 
 class EntryDetail(CreateView):
