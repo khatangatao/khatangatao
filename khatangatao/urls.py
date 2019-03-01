@@ -12,6 +12,7 @@ from blog import views
 urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='home'),
     url(r'^', include(blog.urls)),
+    url(r'^authors/', views.AuthorList.as_view(), name='authors'),
     url(r'^admin/', include(admin.site.urls)),
 ]
 

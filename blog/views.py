@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView
+from django.contrib.auth.models import User
 
 from .forms import CommentForm
 from .models import Entry, Comment
@@ -13,11 +14,16 @@ class HomeView(ListView):
     paginate_by = 10
 
 
+class AuthorList(ListView):
+    template_name = 'authors.html'
+    queryset = User.objects.order_by('pk')
+    paginate_by = 10
+
+
 class EntryDetail(CreateView):
     model = Entry
     template_name = 'blog/entry_detail.html'
     form_class = CommentForm
-
 
     def get_form_kwargs(self):
         """
