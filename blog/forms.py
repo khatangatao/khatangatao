@@ -18,3 +18,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('name', 'email', 'body')
+        widgets = {
+            'name': forms.Textarea(attrs={'placeholder': 'Введите ваше имя', 'cols': 50, 'rows': 1}),
+            'email': forms.Textarea(attrs={'placeholder': 'email', 'cols': 50, 'rows': 1}),
+            'body': forms.Textarea(attrs={'placeholder': 'Введите текст комментария', 'cols': 50, 'rows': 10}),
+
+        }
