@@ -21,9 +21,9 @@ class Entry(models.Model):
 
 class Comment(models.Model):
     entry = models.ForeignKey(Entry)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='Имя')
     email = models.EmailField(max_length=200)
-    body = models.TextField(max_length=1000)
+    body = models.TextField(max_length=1000, verbose_name='Комментарий')
     created_at = models.DateTimeField(auto_now_add=True, editable=True)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
 
