@@ -5,12 +5,11 @@
     <hr>
     <h4>Комментарии</h4>
     {% for comment in entry.comment_set.all %}
-        <p><em>Posted by {{ comment.name }}</em></p>
+        <p><em>{{ comment.name }} сообщает:</em></p>
         {{ comment|linebreaks }}
     {% empty %}
         Комментариев пока нет.
     {% endfor %}
-    <h5>Add a comment</h5>
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
