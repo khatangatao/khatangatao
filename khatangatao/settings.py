@@ -25,7 +25,7 @@ SECRET_KEY = '_7#@wv#0nk0-^g!+7$l9q!ay&j+k##p6dha5n%^nrl1746bz9h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['khatangatao.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'rest_framework',
+    'rest_framework.authtoken',
     'catalog.apps.CatalogConfig'
 ]
 
@@ -84,7 +86,6 @@ WSGI_APPLICATION = 'khatangatao.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('POSTGRES_DB', 'main_db'),
         'USER': os.environ.get('POSTGRES_USER', 'maindb_user'),
