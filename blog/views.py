@@ -1,11 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from django.shortcuts import get_object_or_404
+from django.views.generic import ListView
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 
 from .forms import CommentForm
-from .models import Entry, Comment
+from .models import Entry
 
 
 class HomeView(ListView):
@@ -48,3 +47,20 @@ class EntryDetail(CreateView):
         Returns the supplied URL.
         """
         return self.get_object().get_absolute_url()
+
+
+#  временное место для API View
+from .serializers import EntrySerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
+from blog.api.auth.bearer import BearerTokenAuthentication
+
+
+class EntryApi(ModelViewSet):
+    """Convert data to JSON format and vice versa"""
+    queryset = Entry.objects.all()
+    serializer_class = EntrySerializer
+    authentication_classes = (BearerTokenAuthentication,)
+    permission_classes = (
+        IsAuthenticated,
+    )

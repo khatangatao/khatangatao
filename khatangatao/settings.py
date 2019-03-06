@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import re
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +24,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_7#@wv#0nk0-^g!+7$l9q!ay&j+k##p6dha5n%^nrl1746bz9h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False').lower() in (
+    "on", "yes", "true", "t", "1"
+)
 
-ALLOWED_HOSTS = ['khatangatao.com']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ah = os.environ.get('ALLOWED_HOSTS', '*')
+    ah = re.split(',', ah)
+    ALLOWED_HOSTS = ah
 
 
 # Application definition
@@ -38,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'rest_framework',
+    'rest_framework.authtoken',
     'catalog.apps.CatalogConfig'
 ]
 
@@ -72,19 +82,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'khatangatao.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('POSTGRES_DB', 'main_db'),
         'USER': os.environ.get('POSTGRES_USER', 'maindb_user'),
