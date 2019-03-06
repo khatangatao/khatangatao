@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^', include(blog.urls)),
     url(r'^authors/', views.AuthorList.as_view(), name='authors'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/', include('blog.api.urls', namespace='api')),
 ]
 
 urlpatterns += [
