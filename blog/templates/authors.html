@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="authors">
     {% for user in user_list %}
         <li><a href="">{{ user }}</a></li>
     {% empty %}
         <p>Пока никого нет.</p>
     {% endfor %}
+</div>
 {% endblock content %}
