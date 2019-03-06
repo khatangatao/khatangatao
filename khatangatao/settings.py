@@ -24,18 +24,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_7#@wv#0nk0-^g!+7$l9q!ay&j+k##p6dha5n%^nrl1746bz9h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG', 'False').lower() in (
-#     "on", "yes", "true", "t", "1"
-# )
-#
-# if DEBUG:
-#     ALLOWED_HOSTS = ['*']
-# else:
-#     ah = os.environ.get('ALLOWED_HOSTS', '*')
-#     ah = re.split(',', ah)
-#     ALLOWED_HOSTS = ah
-DEBUG = False
-ALLOWED_HOSTS = ['khatangatao.com']
+DEBUG = os.environ.get('DEBUG', 'False').lower() in (
+    "on", "yes", "true", "t", "1"
+)
+
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ah = os.environ.get('ALLOWED_HOSTS', '*')
+    ah = re.split(',', ah)
+    ALLOWED_HOSTS = ah
+
 
 # Application definition
 
