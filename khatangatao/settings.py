@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'blog',
     'rest_framework',
     'rest_framework.authtoken',
-    'catalog.apps.CatalogConfig'
+    'catalog.apps.CatalogConfig',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -85,9 +86,9 @@ WSGI_APPLICATION = 'khatangatao.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRES_DB', 'main_db'),
-        'USER': os.environ.get('POSTGRES_USER', 'maindb_user'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'pR!s+an'),
+        'NAME': os.environ.get('POSTGRES_DB', 'db'),
+        'USER': os.environ.get('POSTGRES_USER', 'user'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'password'),
         'HOST': os.environ.get('POSTGRES_HOST', '127.0.0.1'),
         'PORT': os.environ.get('POSTGRES_PORT', 5432)
     }
@@ -133,3 +134,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+
+# Django Channels settings
+CHANNEL_REDIS = os.environ.get('CHANNEL_REDIS', '127.0.0.1')
+CHANNEL_REDIS_PORT = int(os.environ.get('CHANNEL_REDIS_PORT', 6379))
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [(CHANNEL_REDIS, CHANNEL_REDIS_PORT)],
+        },
+        'ROUTING': 'khatangatao.routing.channel_routing',
+    },
+}
