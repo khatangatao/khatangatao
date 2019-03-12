@@ -20,7 +20,7 @@ services:
       - "6379:6379"
 
   backend_worker:
-    image: khatangatao
+    image: khatangatao_backend
     container_name: khatangatao_backend_worker
     volumes:
       - "./data/media:/opt/media"
@@ -30,7 +30,7 @@ services:
     entrypoint: ./run_backends.sh worker
 
   backend:
-    image: khatangatao
+    image: khatangatao_backend
     container_name: khatangatao_backend
     volumes:
       - "./data/media:/opt/media"
