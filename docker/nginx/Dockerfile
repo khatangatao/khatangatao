@@ -6,6 +6,7 @@
 # Колекционирование статики
 # ----------------------------------------------------------------------------------------------------------------------
 FROM python:3.6-stretch AS collection-static
+LABEL maintainer="khatangatao@gmail.com"
 
 RUN apt-get update && apt-get install -y locales tree && apt-get autoremove -y
 
@@ -37,5 +38,5 @@ RUN python ./manage.py collectstatic --noinput
 # Подготовка nginx-image к бою
 # ----------------------------------------------------------------------------------------------------------------------
 FROM nginx:1.13-alpine
-COPY --from=collection-static /opt/static_files /var/www/static
+COPY --from=collection-static /opt/static /var/www/static
 EXPOSE 80
