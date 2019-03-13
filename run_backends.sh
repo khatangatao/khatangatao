@@ -22,5 +22,5 @@ else
     python ./manage.py migrate --noinput
 
     echo "Run server..."
-    daphne s112.asgi:channel_layer -b 0.0.0.0
+    daphne khatangatao.asgi:channel_layer -b 0.0.0.0
 fi
