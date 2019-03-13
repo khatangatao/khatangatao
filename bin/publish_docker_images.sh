@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 
-REPO=hub.docker.com
+REPO=khatangatao
 
 echo "Pushing build project into repo ${REPO}..."
 

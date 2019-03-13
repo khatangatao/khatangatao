@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 
-REPO=hub.docker.com
+REPO=khatangatao
 
 echo "Starting build project..."
 
