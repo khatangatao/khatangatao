@@ -109,4 +109,5 @@ venv.bak/
 runserver.sh
 
 # database
-docker/
+docker/.env
+docker/data
