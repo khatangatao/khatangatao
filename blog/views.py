@@ -64,3 +64,8 @@ class EntryApi(ModelViewSet):
     permission_classes = (
         IsAuthenticated,
     )
+
+
+# временное место для Angular приложения
+def index(request):
+    return render(request, '../../frontend/src/index.html',)

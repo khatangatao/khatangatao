@@ -24,12 +24,15 @@
       <ul class="sidebar-nav">
           <li><a href="{% url 'home' %}">Главная</a></li>
           <li><a href="{% url 'authors' %}">Авторы</a></li>
-          <li><a href="">Технологии</a></li>
+          <li><a href="{% url 'frontend' %}">Angular</a></li>
       </ul>
      {% endblock %}
       </div>
       <div class="col-sm-10 ">
       {% block content %}{% endblock %}
+
+      <app-root></app-root>
+
       </div>
     </div>
 

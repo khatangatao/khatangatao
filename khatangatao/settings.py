@@ -136,6 +136,18 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
+#
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+#     os.path.join(BASE_DIR, 'frontend', 'static'),
+# ]
+
+
+
+
+
 # Django Channels settings
 CHANNEL_REDIS = os.environ.get('CHANNEL_REDIS', '127.0.0.1')
 CHANNEL_REDIS_PORT = int(os.environ.get('CHANNEL_REDIS_PORT', 6379))
