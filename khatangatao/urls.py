@@ -14,7 +14,6 @@ urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='home'),
     url(r'^', include(blog.urls)),
     url(r'^authors/', views.AuthorList.as_view(), name='authors'),
-    # todo надо подставить другое представление вместо заглушки
     url(r'^frontend/', views.index, name='frontend'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include('blog.api.urls', namespace='api')),
