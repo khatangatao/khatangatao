@@ -1,13 +1,15 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
 Implement a GUI for viewing and updating blog
 """
-from itertools import chain
 from tkinter import *
 from tkinter.messagebox import showerror, showinfo
-import shelve
 
-shelvename = 'class-shelve'
 fieldnames = ('title', 'author', 'body', 'created_at', 'modified_at')
+
+
 
 
 def makeWidgets():
@@ -33,16 +35,6 @@ def makeWidgets():
 
 
 def fetchRecord():
-    # key = entries['key'].get()
-    # try:
-    #     record = db[key]                                                # fetch by key, show in GUI
-    # except:
-    #     showerror(title='Error', message='Такой статьи нет!')
-    # else:
-    #     for field in fieldnames:
-    #         entries[field].delete(0, END)
-    #         entries[field].insert(0, repr(getattr(record, field)))
-
     import requests
     # todo нужна валидация полей, введенных юзером
     recordNumber = entries['key'].get()
@@ -56,7 +48,6 @@ def fetchRecord():
     if r.status_code == 200:
         for field in fieldnames:
             print(field)
-            # entries[field] = r.json().get(field)
             entries[field].delete(0, END)
             entries[field].insert(0, r.json().get(field, ''))
             print(entries[field].get())
@@ -66,18 +57,8 @@ def fetchRecord():
 
 
 def updateRecord():
-    # key = entries['key'].get()
-    # if key in db:
-    #     record = db[key]                                                # update existing record
-    # else:
-    #     from person import Person                                       # make/store new one for key
-    #     record = Person(name='?', age='?')                              # eval: strings must be quoted
-    # for field in fieldnames:
-    #     setattr(record, field, eval(entries[field].get()))
-    # db[key] = record
     import requests
     import json
-    # recordNumber = entries['key'].get()
     data = {}
 
     target = 'http://khatangatao.com/api/entry/'
