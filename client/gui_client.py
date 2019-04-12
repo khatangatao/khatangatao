@@ -74,17 +74,35 @@ def updateRecord():
     print(r.status_code)
 
 def checkAvaibility():
-    # todo распараллелить с основным потоком
+    executeInNewThread(pingCheck())
+
+def checkHomePage():
+    import requests
+    target = 'http://khatangatao.com/'
+    headers = {"Authorization": "Bearer 56a4f78b7f4a6990d3ae6c223a73249b8765c0c1"}
+    r = requests.get(target, headers=headers)
+    print(r.status_code)
+
+
+def pingCheck():
     import subprocess
     reply = subprocess.run(['ping', '-c', '3', '-n', 'khatangatao.com'],
                            stdout=subprocess.PIPE,
                            stdin=subprocess.PIPE,
                            )
-    # todo должно открыться окно с результатом проверки
     if reply.returncode == 0:
         showinfo(title='popup', message='Работает!')
     else:
         showinfo(title='popup', message='Не работает!')
+
+
+def executeInNewThread(function):
+    """Multithreading"""
+    import threading
+    th = threading.Thread(target=function)
+    th.start()
+    print(th)
+    th.join()
 
 
 window = makeWidgets()
