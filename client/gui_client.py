@@ -6,6 +6,8 @@ Implement a GUI for viewing and updating blog
 """
 from tkinter import *
 from tkinter.messagebox import showerror, showinfo
+import threading
+import logging
 
 fieldnames = ('title', 'author', 'body', 'created_at', 'modified_at')
 
@@ -86,6 +88,8 @@ def checkHomePage():
 
 def pingCheck():
     import subprocess
+    # print(threading.current_thread().getName(), 'Starting')
+    logging.debug('Starting')
     reply = subprocess.run(['ping', '-c', '3', '-n', 'khatangatao.com'],
                            stdout=subprocess.PIPE,
                            stdin=subprocess.PIPE,
@@ -95,14 +99,22 @@ def pingCheck():
     else:
         showinfo(title='popup', message='Не работает!')
 
+    # print(threading.current_thread().getName(), 'Exiting')
+    logging.debug('Exiting')
+
 
 def executeInNewThread(function):
     """Multithreading"""
-    import threading
-    th = threading.Thread(target=function)
+    th = threading.Thread(name='pingCheck', target=function)
     th.start()
     print(th)
-    th.join()
+    # th.join()
+
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='[%(levelname)s] (%(threadName)-10s) %(message)s',
+)
 
 
 window = makeWidgets()
