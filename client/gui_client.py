@@ -23,6 +23,7 @@ def makeWidgets():
     entries = {}
 
     for (ix, label) in enumerate(('key',) + fieldnames):
+        print('Параметр ix: {} Параметр label: {}'.format(ix, label))
         lab = Label(form, text=label)
         ent = Entry(form)
         lab.grid(row=ix, column=0)
