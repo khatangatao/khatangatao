@@ -8,7 +8,7 @@ from .models import Entry
 
 
 class HomeView(ListView):
-    template_name = 'index.html'
+    template_name = 'home.html'
     queryset = Entry.objects.order_by('-created_at')
     paginate_by = 10
 
@@ -64,3 +64,8 @@ class EntryApi(ModelViewSet):
     permission_classes = (
         IsAuthenticated,
     )
+
+
+# временное место для Angular приложения
+def index(request):
+    return render(request, 'index.html', )
