@@ -43,7 +43,7 @@ services:
       - 8001:8000
 
   nginx:
-    image: khatngatao_nginx
+    image: khatangatao_nginx
     container_name: khatangatao_nginx
     volumes:
       - "./data/media:/opt/media:ro"
