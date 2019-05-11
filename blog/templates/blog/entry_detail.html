@@ -2,7 +2,7 @@
 
 {% block content %}
     {% include "_entry.html" with entry=entry only %}
-    <hr>
+    <p>Просмотров: {{ num_visits }}</p>    <hr>
     <h4>Комментарии</h4>
     {% for comment in entry.comment_set.all %}
         <p><em>{{ comment.name }} сообщает:</em></p>

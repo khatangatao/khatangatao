@@ -12,6 +12,17 @@ class HomeView(ListView):
     queryset = Entry.objects.order_by('-created_at')
     paginate_by = 10
 
+    def get_context_data(self, **kwargs):
+        """
+        Insert the form into the context dict.
+        """
+        d = super().get_context_data(**kwargs)
+        num_visits = self.request.session.get('num_visits', 0)
+        self.request.session['num_visits'] = num_visits + 1
+        d['num_visits'] = self.request.session['num_visits']
+        return d
+
+
 
 class AuthorList(ListView):
     template_name = 'authors.html'
@@ -40,6 +51,9 @@ class EntryDetail(CreateView):
         """
         d = super().get_context_data(**kwargs)
         d['entry'] = self.get_object()
+        num_visits = self.request.session.get('num_visits', 0)
+        self.request.session['num_visits'] = num_visits + 1
+        d['num_visits'] = self.request.session['num_visits']
         return d
 
     def get_success_url(self):
